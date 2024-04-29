@@ -8,4 +8,4 @@ resources:
 - 03-ingress.yaml
 images:
 - name: ziadmmh/goviolin
-  newTag: v0.0.4
+  newTag: v0.0.1
