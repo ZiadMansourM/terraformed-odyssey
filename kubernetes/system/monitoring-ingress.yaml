@@ -1,0 +1,65 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: monitoring
+  namespace: monitoring
+  annotations:
+    cert-manager.io/issuer: letsencrypt-dns01-production-cluster-issuer-private
+spec:
+  ingressClassName: internal-nginx
+  tls: 
+  - hosts:
+    - grafana.k8s.sreboy.com
+    secretName: grafana-k8s-sreboy-com-key-pair
+  - hosts:
+    - prometheus.k8s.sreboy.com
+    secretName: prometheus-k8s-sreboy-com-key-pair
+  - hosts:
+    - alertmanager.k8s.sreboy.com
+    secretName: alertmanager-k8s-sreboy-com-key-pair
+  - hosts:
+    - kube-state-metrics.k8s.sreboy.com
+    secretName: kube-state-metrics-k8s-sreboy-com-key-pair
+  rules:
+  - host: grafana.k8s.sreboy.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: monitoring-grafana
+            port:
+              number: 80
+  - host: prometheus.k8s.sreboy.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: monitoring-kube-prometheus-prometheus
+            port:
+              number: 9090
+  - host: alertmanager.k8s.sreboy.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: monitoring-kube-prometheus-alertmanager
+            port:
+              number: 9093
+  - host: kube-state-metrics.k8s.sreboy.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: monitoring-kube-state-metrics
+            port:
+              number: 8080
+---

@@ -1,0 +1,40 @@
+resources:
+- monitoring-ingress.yaml
+- argocd-ingress.yaml
+
+configMapGenerator:
+- name: external-ingress-14314
+  namespace: ingress-nginx-external
+  files:
+  - dashboards/ingress-nginx-14314.json
+  options:
+    # disableNameSuffixHash: true
+    labels:
+      grafana_dashboard: "1"
+
+- name: internal-ingress-14314
+  namespace: ingress-nginx-internal
+  files:
+  - dashboards/ingress-nginx-14314.json
+  options:
+    # disableNameSuffixHash: true
+    labels:
+      grafana_dashboard: "1"
+
+- name: cert-manager-20842
+  namespace: cert-manager
+  files:
+  - dashboards/cert-manager-20842.json
+  options:
+    # disableNameSuffixHash: true
+    labels:
+      grafana_dashboard: "1"
+
+- name: argocd-14584
+  namespace: argocd
+  files:
+  - dashboards/argocd-14584.json
+  options:
+    # disableNameSuffixHash: true
+    labels:
+      grafana_dashboard: "1"

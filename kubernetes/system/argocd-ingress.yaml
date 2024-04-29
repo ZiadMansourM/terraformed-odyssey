@@ -2,24 +2,25 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: goviolin
-  namespace: goviolin
+  name: argocd
+  namespace: argocd
   annotations:
     cert-manager.io/issuer: letsencrypt-dns01-production-cluster-issuer-public
 spec:
   ingressClassName: external-nginx
-  tls:
+  tls: 
   - hosts:
-    - goviolin.k8s.sreboy.com
-    secretName: goviolin-k8s-sreboy-com-key-pair
+    - argocd.k8s.sreboy.com
+    secretName: argocd-k8s-sreboy-com-key-pair
   rules:
-  - host: goviolin.k8s.sreboy.com
+  - host: argocd.k8s.sreboy.com
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: goviolin
+            name: argocd-server
             port:
-              number: 80
+              number: 443
+---
