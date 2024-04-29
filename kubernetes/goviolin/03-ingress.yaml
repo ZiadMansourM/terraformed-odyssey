@@ -1,0 +1,25 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: goviolin
+  namespace: goviolin
+  annotations:
+    cert-manager.io/issuer: letsencrypt-dns01-production-cluster-issuer
+spec:
+  ingressClassName: external-nginx
+  tls:
+  - hosts:
+    - goviolin.k8s.sreboy.com
+    secretName: goviolin-k8s-sreboy-com-key-pair
+  rules:
+  - host: goviolin.k8s.sreboy.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: goviolin
+            port:
+              number: 80
