@@ -1,29 +1,24 @@
-# 1. Deployed Kube Prometheus Stack
-# 2. Deployed Ingress Nginx and Exposed metrics
-# 3. Deployed Cert Manager and Exposed metrics. Plus Configured Route53 DNS-01 challenge
+# Deploy Argocd helm chart with the following:
+# - I am using app-of-apps pattern to deploy the argocd applications
+# - Source Repository: https://github.com/ZiadMansourM/terraformed-odyssey
+# - Path to Root ArgoCD Application: terraformed-odyssey/arogcd/root-app/
 
-# 4. Create a Cluster Issuer with dns01 challenge
-# 5. Expose Prometheus at: https://prometheus.goviolin.k8s.sreboy.com
-# 6. Expose Grafana at: https://grafana.govioline.k8s.sreboy.com
-# 7. Expose Alert Manager at: https://alertmanager.goviolin.k8s.sreboy.com
-# 8. Expose GoVioLin app at: https://goviolin.k8s.sreboy.com
-
-data "aws_route53_zone" "k8s" {
-  name = "k8s.sreboy.com."
-}
-
-resource "helm_release" "test_eks_chart" {
-  # Local chart ./files/test-eks-chart
-  repository = "./files/test-eks-chart"
-  chart      = "test-eks-chart"
-  name       = "test-eks-chart"
-  namespace  = "default"
-  atomic = true
+resource "helm_release" "argocd" {
+  name       = "argocd"
+  namespace  = "argocd"
+  repository = "https://argoproj.github.io/argo-helm"
+  chart      = "argo-cd"
+  version    = "3.12.3"
+  timeout    = 300
+  atomic     = true
+  create_namespace = true
 
   values = [
     <<YAML
-region: ${var.region}
-hostedZoneID: ${data.aws_route53_zone.k8s.zone_id}
+repositories:
+  root-repo:
+    url: https://github.com/ZiadMansourM/terraformed-odyssey
+    type: git
     YAML
   ]
 }
