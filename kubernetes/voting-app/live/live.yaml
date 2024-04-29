@@ -45,7 +45,6 @@ metadata:
 spec:
   ports:
   - name: result-service
-    nodePort: 31001
     port: 5001
     targetPort: 80
   selector:
@@ -62,7 +61,6 @@ metadata:
 spec:
   ports:
   - name: vote-service
-    nodePort: 31000
     port: 5000
     targetPort: 80
   selector:
