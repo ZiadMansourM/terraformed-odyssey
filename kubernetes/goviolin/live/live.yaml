@@ -33,7 +33,7 @@ spec:
         app: goviolin
     spec:
       containers:
-      - image: ziadmmh/goviolin:v0.0.1
+      - image: ziadmmh/goviolin:latest
         name: goviolin
         ports:
         - containerPort: 8080
