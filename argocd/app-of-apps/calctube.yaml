@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: calctube
+  namespace: argocd
+  annotations:
+    notifications.argoproj.io/subscribe.on-created.slack: calctube-alerts
+    notifications.argoproj.io/subscribe.on-deleted.slack: calctube-alerts
+    notifications.argoproj.io/subscribe.on-deployed.slack: calctube-alerts
+    notifications.argoproj.io/subscribe.on-health-degraded.slack: calctube-alerts
+    notifications.argoproj.io/subscribe.on-sync-failed.slack: calctube-alerts
+    notifications.argoproj.io/subscribe.on-sync-running.slack: calctube-alerts
+    notifications.argoproj.io/subscribe.on-sync-status-unknown.slack: calctube-alerts
+    notifications.argoproj.io/subscribe.on-sync-succeeded.slack: calctube-alerts
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io/foreground
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/ZiadMansourM/terraformed-odyssey.git
+    targetRevision: HEAD
+    path: ./kubernetes/calctube/live
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true

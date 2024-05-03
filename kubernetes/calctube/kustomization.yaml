@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- 00-namespace.yaml
+- 01-deployment.yaml
+- 02-service.yaml
+- 03-ingress.yaml
+
+images:
+- name: ziadmmh/calctube
+  newTag: v0.0.1
+
+secretGenerator:
+- name: calctube-external-ingress-passwd
+  namespace: calctube
+  files:
+  - files/auth

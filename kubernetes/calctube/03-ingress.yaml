@@ -1,0 +1,29 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: calctube
+  namespace: calctube
+  annotations:
+    cert-manager.io/issuer: letsencrypt-dns01-production-cluster-issuer-public
+    # Ref: https://kubernetes.github.io/ingress-nginx/examples/auth/basic/
+    nginx.ingress.kubernetes.io/auth-type: basic
+    nginx.ingress.kubernetes.io/auth-secret: calctube-external-ingress-passwd
+    nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required - CalcTube'
+spec:
+  ingressClassName: external-nginx
+  tls:
+  - hosts:
+    - calctube.k8s.sreboy.com
+    secretName: calctube-k8s-sreboy-com-key-pair
+  rules:
+  - host: calctube.k8s.sreboy.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: calctube
+            port:
+              number: 80

@@ -1,0 +1,76 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: calctube
+---
+apiVersion: v1
+data:
+  auth: emlhZGg6JGFwcjEkQmFPQkFKa0okQ0ZyY1ZSL3dVTkNMU3VTVm54Z1lnLgo=
+kind: Secret
+metadata:
+  name: calctube-external-ingress-passwd-2kd92chc88
+  namespace: calctube
+type: Opaque
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: calctube
+  namespace: calctube
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: calctube
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: calctube
+  namespace: calctube
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: calctube
+  template:
+    metadata:
+      labels:
+        app: calctube
+    spec:
+      containers:
+      - image: ziadmmh/calctube:v0.0.1
+        name: calctube
+        ports:
+        - containerPort: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/issuer: letsencrypt-dns01-production-cluster-issuer-public
+    nginx.ingress.kubernetes.io/auth-realm: Authentication Required - CalcTube
+    nginx.ingress.kubernetes.io/auth-secret: calctube-external-ingress-passwd-2kd92chc88
+    nginx.ingress.kubernetes.io/auth-type: basic
+  name: calctube
+  namespace: calctube
+spec:
+  ingressClassName: external-nginx
+  rules:
+  - host: calctube.k8s.sreboy.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: calctube
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - calctube.k8s.sreboy.com
+    secretName: calctube-k8s-sreboy-com-key-pair

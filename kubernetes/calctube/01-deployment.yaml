@@ -1,0 +1,21 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: calctube
+  namespace: calctube
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: calctube
+  template:
+    metadata:
+      labels:
+        app: calctube
+    spec:
+      containers:
+      - name: calctube
+        image: ziadmmh/calctube:v0.0.1
+        ports:
+        - containerPort: 80
