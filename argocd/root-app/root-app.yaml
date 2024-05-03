@@ -5,9 +5,14 @@ metadata:
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "0"
-    notifications.argoproj.io/subscribe.on-deployed.slack: alerts
-    notifications.argoproj.io/subscribe.on-sync-failed.slack: alerts
-    notifications.argoproj.io/subscribe.on-sync-succeeded.slack: alerts
+    notifications.argoproj.io/subscribe.on-created.slack: root-app-alerts
+    notifications.argoproj.io/subscribe.on-deleted.slack: root-app-alerts
+    notifications.argoproj.io/subscribe.on-deployed.slack: root-app-alerts
+    notifications.argoproj.io/subscribe.on-health-degraded.slack: root-app-alerts
+    notifications.argoproj.io/subscribe.on-sync-failed.slack: root-app-alerts
+    notifications.argoproj.io/subscribe.on-sync-running.slack: root-app-alerts
+    notifications.argoproj.io/subscribe.on-sync-status-unknown.slack: root-app-alerts
+    notifications.argoproj.io/subscribe.on-sync-succeeded.slack: root-app-alerts
 spec:
   project: default
   source:

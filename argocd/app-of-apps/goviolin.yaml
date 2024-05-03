@@ -4,9 +4,14 @@ metadata:
   name: goviolin
   namespace: argocd
   annotations:
-    notifications.argoproj.io/subscribe.on-deployed.slack: alerts
-    notifications.argoproj.io/subscribe.on-sync-failed.slack: alerts
-    notifications.argoproj.io/subscribe.on-sync-succeeded.slack: alerts
+    notifications.argoproj.io/subscribe.on-created.slack: goviolin-alerts
+    notifications.argoproj.io/subscribe.on-deleted.slack: goviolin-alerts
+    notifications.argoproj.io/subscribe.on-deployed.slack: goviolin-alerts
+    notifications.argoproj.io/subscribe.on-health-degraded.slack: goviolin-alerts
+    notifications.argoproj.io/subscribe.on-sync-failed.slack: goviolin-alerts
+    notifications.argoproj.io/subscribe.on-sync-running.slack: goviolin-alerts
+    notifications.argoproj.io/subscribe.on-sync-status-unknown.slack: goviolin-alerts
+    notifications.argoproj.io/subscribe.on-sync-succeeded.slack: goviolin-alerts
 spec:
   project: default
   source:

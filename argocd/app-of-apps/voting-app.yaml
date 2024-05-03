@@ -4,9 +4,14 @@ metadata:
   name: voting-app
   namespace: argocd
   annotations:
-    notifications.argoproj.io/subscribe.on-deployed.slack: alerts
-    notifications.argoproj.io/subscribe.on-sync-failed.slack: alerts
-    notifications.argoproj.io/subscribe.on-sync-succeeded.slack: alerts
+    notifications.argoproj.io/subscribe.on-created.slack: voting-app-alerts
+    notifications.argoproj.io/subscribe.on-deleted.slack: voting-app-alerts
+    notifications.argoproj.io/subscribe.on-deployed.slack: voting-app-alerts
+    notifications.argoproj.io/subscribe.on-health-degraded.slack: voting-app-alerts
+    notifications.argoproj.io/subscribe.on-sync-failed.slack: voting-app-alerts
+    notifications.argoproj.io/subscribe.on-sync-running.slack: voting-app-alerts
+    notifications.argoproj.io/subscribe.on-sync-status-unknown.slack: voting-app-alerts
+    notifications.argoproj.io/subscribe.on-sync-succeeded.slack: voting-app-alerts
 spec:
   project: default
   source:

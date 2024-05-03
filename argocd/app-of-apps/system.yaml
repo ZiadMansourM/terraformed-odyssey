@@ -4,9 +4,14 @@ metadata:
   name: system
   namespace: argocd
   annotations:
-    notifications.argoproj.io/subscribe.on-deployed.slack: alerts
-    notifications.argoproj.io/subscribe.on-sync-failed.slack: alerts
-    notifications.argoproj.io/subscribe.on-sync-succeeded.slack: alerts
+    notifications.argoproj.io/subscribe.on-created.slack: system-alerts
+    notifications.argoproj.io/subscribe.on-deleted.slack: system-alerts
+    notifications.argoproj.io/subscribe.on-deployed.slack: system-alerts
+    notifications.argoproj.io/subscribe.on-health-degraded.slack: system-alerts
+    notifications.argoproj.io/subscribe.on-sync-failed.slack: system-alerts
+    notifications.argoproj.io/subscribe.on-sync-running.slack: system-alerts
+    notifications.argoproj.io/subscribe.on-sync-status-unknown.slack: system-alerts
+    notifications.argoproj.io/subscribe.on-sync-succeeded.slack: system-alerts
 spec:
   project: default
   source:
