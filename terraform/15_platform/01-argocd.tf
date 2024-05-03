@@ -34,7 +34,7 @@ resource "kubectl_manifest" "root_app" {
       "source" = {
         "repoURL" = "https://github.com/ZiadMansourM/terraformed-odyssey.git"
         "targetRevision" = "HEAD"
-        "path" = "./argocd/root-app"
+        "path" = "./argocd/app-of-apps"
       }
       "destination" = {
         "server" = "https://kubernetes.default.svc"
