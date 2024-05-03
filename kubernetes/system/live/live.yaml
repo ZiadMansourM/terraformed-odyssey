@@ -11957,15 +11957,15 @@ metadata:
   annotations:
     sealedsecrets.bitnami.com/namespace-wide: "true"
   creationTimestamp: null
-  name: argocd-notifications-secret-gbh7d6ccg2
+  name: argocd-notifications-secret-hd62mf25hg
   namespace: argocd
 spec:
   encryptedData:
-    slack-token: AgCkpJTK1BLHCYRmyTmS5Z7rd8dDtF73cK53bIi/vFLPIhSAAWmB073iCvQqSvQONctN76OFfTGpcao/4O7qbvtFlciDYO1llDq1IGHWjd7+5F+aFoU+oNRUYHXDwZ3tAdoB34aCXqBWkCaOzTe05kJVegbR1ttX8WSo3c1wNoCCuCCHTEjAgLd60EXbZ/AuQXAeDuzhCYS2eNsADMKe9vL/6xFAf0CJvbHXb005/e4m+5opJYRSG4wN9AHn5CLEnoCvNN5hI2GhXlbixNUThdL4VDVi8x20FnwaiIpfCjc1EHeGsYHtm0R1Zdug6CnmOPsjKLw8Zz6YrYyNvlFXVTYh2flwGEnAS/xoub58M8R4K58CpMK4C4WIXrKlTMR5TtSJSmWRZsqrGNG3eF4tarGBw/acuHD/odXYTAiZLldVP3Alr3rpkaKhIxO/AhRSGN9fE3gDfDQqRLB6OQeIoDq7zBvDD0e8C/lIjvaZMIetFpnh9ijo+B4D49lfVbSqmNRVcQp0V8blaVmvgtmWDKYDzgh+2FJyaWkgeXaY17Vrw9r844sLSIcFh+bzDP/ZKUGputXsinZ+o+uc6/ZhIUMtLkB2rMONw75Y2yz51wkQj1bypwfmnuG2A0gx2kqUFC38oMai2U5Jw1wcFSkx/rozCfKMm27j0z6htMQ/DAwBaonYWTT/mgwegmiy1lAnH+qBGQC6GDNZNT43u8Vqtg+RNNGyT6xdLS3Sdpb4Qh9B7Rb8Ln62s0flFkbZRS/8Nn01+utNNrOsQnA=
+    slack-token: AgAo8tNOM3dLfWoKU+fFWS4zeSMpAJXyAB0FhlGcCsMBm/kyX71hnx4QeYsJpQk6SrsUvNtarMq5CacWBwexGbdX/gipWTO3RWNE+5vXgOq8kU71EDaAAFK6NSfv8QYHZIuO9TQ9a8nO/rgmCKryIi1ruEFcy4IYa1xDsvb9ZjPzD4CBFi3DzUObKyu+an3bOof9a+UlaR1bYMaIBMUF+ahQeG3A5vM4Xa19kQooyJ0q5M/Cx37jKt+k9g3S+EP+4TzBJEJic8Fca1tYLuvmbJYdmUX4xp8u9NrWwmJLxaBvrlpvAy2INPdt92lGVfIxkHV2zurt3PTyCypM+1EDr6fWlRkziQrXK3EPLmnnQsXr58svV0FTXS6G355SQqgaaF73TDT2yVd/JeEgqpkdluEQe0oT6Cf2X3sQ7h/HZs6SPY67P0aRH1skTBj+sWqbIQqVLQZuRUk967pGTPeCdqP7TKsZZQXqLlKhIRR3mWSuH1jSC33W49GCZQp9axeIxQD/aT/VIHz8iB+fkEgzqKVk1G3zxLSgrC4hC5PVC3D8hOUXe9oCGMjrbwFD84+AzB9NdLav7rzz1bu/iCihoZAln5M5BkFXsWvD+dEOuC4+hEpXLdi5T5t1Q8fx9SZ15BoTEemJVOjXvgtbsifaortG5sjv63pTd0dl+zr7XzfqFks4pTxm6xeVApl21C7towVMfMTXa7qDfzdH6BF0nEw8f8DI7rDfiTTPp4L2Ycj64HPKwbFHNWqL2V4oi7VftONsEJ/HlQ/Z01Q=
   template:
     metadata:
       creationTimestamp: null
-      name: argocd-notifications-secret-gbh7d6ccg2
+      name: argocd-notifications-secret-hd62mf25hg
       namespace: argocd
 ---
 apiVersion: networking.k8s.io/v1
