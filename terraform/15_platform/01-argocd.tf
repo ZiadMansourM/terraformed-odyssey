@@ -24,6 +24,9 @@ resource "kubectl_manifest" "root_app" {
       "namespace" = "argocd"
       "annotations" = {
         "argocd.argoproj.io/sync-wave" = "0"
+        "notifications.argoproj.io/subscribe.on-deployed.slack" = "alerts"
+        "notifications.argoproj.io/subscribe.on-sync-failed.slack" = "alerts"
+        "notifications.argoproj.io/subscribe.on-sync-succeeded.slack" = "alerts"
       }
     }
     "spec" = {
