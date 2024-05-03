@@ -1,0 +1,24 @@
+# Ref: https://github.com/argoproj/argo-helm/blob/main/charts/argo-cd/values.yaml
+configs:
+  params:
+    server.insecure: true
+
+notifications:
+  enabled: true
+  secret:
+    # -- Whether helm chart creates notifications controller secret
+    create: false
+    # -- Generic key:value pairs to be inserted into the secret
+    # Can be used for templates, notification services etc. Some examples given below.
+    # For more information: https://argo-cd.readthedocs.io/en/stable/operator-manual/notifications/services/overview/
+    # items:
+      # slack-token: "xoxb-..."
+  cm:
+    # -- Whether helm chart creates notifications controller config map
+    create: false
+
+server:
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true

@@ -6,6 +6,13 @@ resources:
 - 01-deployment.yaml
 - 02-service.yaml
 - 03-ingress.yaml
+
 images:
 - name: ziadmmh/goviolin
   newTag: v0.0.1
+
+secretGenerator:
+- name: goviolin-external-ingress-passwd
+  namespace: goviolin
+  files:
+  - files/auth

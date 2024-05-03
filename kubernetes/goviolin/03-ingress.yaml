@@ -6,6 +6,9 @@ metadata:
   namespace: goviolin
   annotations:
     cert-manager.io/issuer: letsencrypt-dns01-production-cluster-issuer-public
+    nginx.ingress.kubernetes.io/auth-type: basic
+    nginx.ingress.kubernetes.io/auth-secret: goviolin-external-ingress-passwd
+    nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required - GoViolin'
 spec:
   ingressClassName: external-nginx
   tls:

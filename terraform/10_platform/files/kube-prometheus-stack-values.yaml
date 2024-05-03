@@ -54,3 +54,7 @@ prometheus:
 # Optionally, you can update the grafana admin password
 grafana:
   adminPassword: testing321
+  additionalDataSources:
+  - name: Loki
+    type: loki
+    url: http://loki-loki-distributed-query-frontend.monitoring:3100

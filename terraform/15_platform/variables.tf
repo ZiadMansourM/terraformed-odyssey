@@ -15,3 +15,9 @@ variable "cluster_name" {
   type        = string
   default     = "eks-cluster-production"
 }
+
+variable "slack_token" {
+  description = "The Slack token to use for notifications."
+  type        = string
+  default     = "xoxb-7013808384532-7004747320342-aWaHljQazh1lgpUovWPtrEs4"
+}

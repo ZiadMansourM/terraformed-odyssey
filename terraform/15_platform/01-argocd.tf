@@ -8,30 +8,9 @@ resource "helm_release" "argocd" {
   atomic     = true
   create_namespace = true
 
-  # configs:
-  #   params:
-  #     server.insecure: true
-
-  set {
-    name = "configs.params.server\\.insecure"
-    value = "true"
-  }
-
-  # server:
-  # metrics:
-  #   enabled: true
-  #   serviceMonitor:
-  #     enabled: true
-
-  set {
-    name  = "server.metrics.enabled"
-    value = "true"
-  }
-
-  set {
-    name  = "server.metrics.serviceMonitor.enabled"
-    value = "true"
-  }
+  values = [
+    file("${path.module}/files/argocd-values.yaml")
+  ]
 }
 
 resource "kubectl_manifest" "root_app" {

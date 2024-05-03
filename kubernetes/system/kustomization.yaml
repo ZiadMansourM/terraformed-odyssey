@@ -1,6 +1,32 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
 resources:
 - monitoring-ingress.yaml
 - argocd-ingress.yaml
+- argocd-notifications-cm.yaml
+- sealed-argocd-notifications-secret.yaml
+
+configurations:
+- components/sealed-secret-config.yaml
+
+secretGenerator:
+- name: argocd-notifications-secret
+  namespace: argocd
+  files:
+  - sealed-argocd-notifications-secret.yaml
+  options:
+    annotations:
+      config.kubernetes.io/local-config: "true"
+
+patches:
+- target:
+    kind: SealedSecret
+    name: argocd-notifications-secret
+  patch: |-
+    - op: replace
+      path: /metadata/annotations/sealedsecrets.bitnami.com~1namespace-wide
+      value: "true"
 
 configMapGenerator:
 - name: external-ingress-14314
@@ -34,6 +60,15 @@ configMapGenerator:
   namespace: argocd
   files:
   - dashboards/argocd-14584.json
+  options:
+    # disableNameSuffixHash: true
+    labels:
+      grafana_dashboard: "1"
+
+- name: loki-14055
+  namespace: monitoring
+  files:
+  - dashboards/loki-14055.json
   options:
     # disableNameSuffixHash: true
     labels:
