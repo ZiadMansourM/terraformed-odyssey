@@ -13,6 +13,8 @@ metadata:
     notifications.argoproj.io/subscribe.on-sync-running.slack: root-app-alerts
     notifications.argoproj.io/subscribe.on-sync-status-unknown.slack: root-app-alerts
     notifications.argoproj.io/subscribe.on-sync-succeeded.slack: root-app-alerts
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io/foreground
 spec:
   project: default
   source:
