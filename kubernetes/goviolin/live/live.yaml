@@ -4,6 +4,15 @@ metadata:
   name: goviolin
 ---
 apiVersion: v1
+data:
+  auth: emlhZGg6JGFwcjEkWjBrUXhqQnkkT0Zrdk45TEJUUzFwcE9MNGswZW9SLwo=
+kind: Secret
+metadata:
+  name: goviolin-external-ingress-passwd-gkfcg2cgtc
+  namespace: goviolin
+type: Opaque
+---
+apiVersion: v1
 kind: Service
 metadata:
   name: goviolin
@@ -33,7 +42,7 @@ spec:
         app: goviolin
     spec:
       containers:
-      - image: ziadmmh/goviolin:latest
+      - image: ziadmmh/goviolin:v0.0.1
         name: goviolin
         ports:
         - containerPort: 8080
@@ -43,6 +52,9 @@ kind: Ingress
 metadata:
   annotations:
     cert-manager.io/issuer: letsencrypt-dns01-production-cluster-issuer-public
+    nginx.ingress.kubernetes.io/auth-realm: Authentication Required - GoViolin
+    nginx.ingress.kubernetes.io/auth-secret: goviolin-external-ingress-passwd-gkfcg2cgtc
+    nginx.ingress.kubernetes.io/auth-type: basic
   name: goviolin
   namespace: goviolin
 spec:

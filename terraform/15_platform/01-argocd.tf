@@ -25,9 +25,6 @@ resource "kubectl_manifest" "root_app" {
       "annotations" = {
         "argocd.argoproj.io/sync-wave" = "0"
       }
-      "finalizers" = [
-        "resources-finalizer.argocd.argoproj.io"
-      ]
     }
     "spec" = {
       "project" = "default"
