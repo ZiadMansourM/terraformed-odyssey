@@ -200,3 +200,41 @@ spec:
       containers:
       - image: dockersamples/examplevotingapp_worker
         name: worker
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/issuer: letsencrypt-dns01-production-cluster-issuer-public
+  name: voting-app
+  namespace: voting-app
+spec:
+  ingressClassName: external-nginx
+  rules:
+  - host: vote.k8s.sreboy.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: vote
+            port:
+              number: 5000
+        path: /
+        pathType: Prefix
+  - host: results.k8s.sreboy.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: result
+            port:
+              number: 5001
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - vote.k8s.sreboy.com
+    secretName: vote-k8s-sreboy-com-key-pair
+  - hosts:
+    - results.k8s.sreboy.com
+    secretName: results-k8s-sreboy-com-key-pair

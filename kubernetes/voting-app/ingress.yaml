@@ -1,0 +1,38 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: voting-app
+  namespace: voting-app
+  annotations:
+    cert-manager.io/issuer: letsencrypt-dns01-production-cluster-issuer-public
+spec:
+  ingressClassName: external-nginx
+  tls:
+  - hosts:
+    - vote.k8s.sreboy.com
+    secretName: vote-k8s-sreboy-com-key-pair
+  - hosts:
+    - results.k8s.sreboy.com
+    secretName: results-k8s-sreboy-com-key-pair
+  rules:
+  - host: vote.k8s.sreboy.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: vote
+            port:
+              number: 5000
+  - host: results.k8s.sreboy.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: result
+            port:
+              number: 5001

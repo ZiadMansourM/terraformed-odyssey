@@ -12,3 +12,4 @@ resources:
 - vote-deployment.yaml
 - vote-service.yaml
 - worker-deployment.yaml
+- ingress.yaml
