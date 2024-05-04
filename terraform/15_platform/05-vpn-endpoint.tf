@@ -42,7 +42,3 @@ resource "aws_ec2_client_vpn_authorization_rule" "internal_dns" {
   target_network_cidr    = data.aws_vpc.main.cidr_block
   access_group_id        = aws_identitystore_group.admins.group_id
 }
-
-output "self_service_portal_url" {
-  value = aws_ec2_client_vpn_endpoint.this.self_service_portal_url
-}
