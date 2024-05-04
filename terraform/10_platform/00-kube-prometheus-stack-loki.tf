@@ -17,13 +17,13 @@ resource "helm_release" "kube_prometheus_stack" {
 }
 
 resource "helm_release" "loki-distributed" {
-  name = "loki"
-  namespace = "monitoring"
-  repository = "https://grafana.github.io/helm-charts"
-  chart = "loki-distributed"
-  version = "0.79.0"
-  timeout = 300
-  atomic = true
+  name             = "loki"
+  namespace        = "monitoring"
+  repository       = "https://grafana.github.io/helm-charts"
+  chart            = "loki-distributed"
+  version          = "0.79.0"
+  timeout          = 300
+  atomic           = true
   create_namespace = true
 
   values = [
@@ -34,13 +34,13 @@ resource "helm_release" "loki-distributed" {
 }
 
 resource "helm_release" "promtail" {
-  name = "promtail"
-  namespace = "monitoring"
-  repository = "https://grafana.github.io/helm-charts"
-  chart = "promtail"
-  version = "6.15.5"
-  timeout = 300
-  atomic = true
+  name             = "promtail"
+  namespace        = "monitoring"
+  repository       = "https://grafana.github.io/helm-charts"
+  chart            = "promtail"
+  version          = "6.15.5"
+  timeout          = 300
+  atomic           = true
   create_namespace = true
 
   values = [

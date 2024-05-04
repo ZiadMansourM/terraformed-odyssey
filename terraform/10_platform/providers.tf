@@ -24,14 +24,6 @@ provider "aws" {
   profile = var.profile
 }
 
-data "aws_eks_cluster" "cluster" {
-  name = var.cluster_name
-}
-
-data "aws_eks_cluster_auth" "cluster" {
-  name = var.cluster_name
-}
-
 provider "kubernetes" {
   host                   = data.aws_eks_cluster.cluster.endpoint
   token                  = data.aws_eks_cluster_auth.cluster.token

@@ -2,7 +2,7 @@
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc
 # https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html
 resource "aws_vpc" "main" {
-  cidr_block = "10.0.0.0/16"
+  cidr_block = var.aws_vpc_main_cidr
 
   # Makes instances shared on the host.
   instance_tenancy = "default"

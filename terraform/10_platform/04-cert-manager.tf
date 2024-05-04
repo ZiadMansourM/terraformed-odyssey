@@ -67,13 +67,13 @@ resource "aws_iam_role_policy_attachment" "cert_manager_acme" {
 }
 
 resource "helm_release" "cert-manager" {
-  name       = "cert-manager"
-  namespace  = "cert-manager"
-  repository = "https://charts.jetstack.io"
-  chart      = "cert-manager"
-  version    = "1.14.4"
-  timeout    = 300
-  atomic     = true
+  name             = "cert-manager"
+  namespace        = "cert-manager"
+  repository       = "https://charts.jetstack.io"
+  chart            = "cert-manager"
+  version          = "1.14.4"
+  timeout          = 300
+  atomic           = true
   create_namespace = true
 
   depends_on = [
@@ -123,14 +123,14 @@ resource "kubernetes_manifest" "cert_manager_cluster_issuer_public" {
 
   manifest = {
     "apiVersion" = "cert-manager.io/v1"
-    "kind" = "ClusterIssuer"
+    "kind"       = "ClusterIssuer"
     "metadata" = {
       "name" = "letsencrypt-dns01-production-cluster-issuer-public"
     }
     "spec" = {
       "acme" = {
         "server" = "https://acme-v02.api.letsencrypt.org/directory"
-        "email" = "ziadmansour.4.9.2000@gmail.com"
+        "email"  = "ziadmansour.4.9.2000@gmail.com"
         "privateKeySecretRef" = {
           "name" = "letsencrypt-production-dns01-public-key-pair"
         }
@@ -138,7 +138,7 @@ resource "kubernetes_manifest" "cert_manager_cluster_issuer_public" {
           {
             "dns01" = {
               "route53" = {
-                "region" = var.region
+                "region"       = var.region
                 "hostedZoneID" = aws_route53_zone.public.zone_id
               }
             }
@@ -156,14 +156,14 @@ resource "kubernetes_manifest" "cert_manager_cluster_issuer_private" {
 
   manifest = {
     "apiVersion" = "cert-manager.io/v1"
-    "kind" = "ClusterIssuer"
+    "kind"       = "ClusterIssuer"
     "metadata" = {
       "name" = "letsencrypt-dns01-production-cluster-issuer-private"
     }
     "spec" = {
       "acme" = {
         "server" = "https://acme-v02.api.letsencrypt.org/directory"
-        "email" = "ziadmansour.4.9.2000@gmail.com"
+        "email"  = "ziadmansour.4.9.2000@gmail.com"
         "privateKeySecretRef" = {
           "name" = "letsencrypt-production-dns01-private-key-pair"
         }
@@ -171,7 +171,7 @@ resource "kubernetes_manifest" "cert_manager_cluster_issuer_private" {
           {
             "dns01" = {
               "route53" = {
-                "region" = var.region
+                "region"       = var.region
                 "hostedZoneID" = aws_route53_zone.private.zone_id
               }
             }
