@@ -11972,7 +11972,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    cert-manager.io/issuer: letsencrypt-dns01-production-cluster-issuer-public
+    cert-manager.io/cluster-issuer: letsencrypt-dns01-production-cluster-issuer-public
   name: argocd
   namespace: argocd
 spec:
@@ -11997,7 +11997,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    cert-manager.io/issuer: letsencrypt-dns01-production-cluster-issuer-private
+    cert-manager.io/cluster-issuer: letsencrypt-dns01-production-cluster-issuer-private
   name: monitoring
   namespace: monitoring
 spec:

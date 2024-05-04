@@ -5,7 +5,7 @@ metadata:
   name: calctube
   namespace: calctube
   annotations:
-    cert-manager.io/issuer: letsencrypt-dns01-production-cluster-issuer-public
+    cert-manager.io/cluster-issuer: letsencrypt-dns01-production-cluster-issuer-public
     # Ref: https://kubernetes.github.io/ingress-nginx/examples/auth/basic/
     nginx.ingress.kubernetes.io/auth-type: basic
     nginx.ingress.kubernetes.io/auth-secret: calctube-external-ingress-passwd

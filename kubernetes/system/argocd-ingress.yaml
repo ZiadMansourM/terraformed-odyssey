@@ -5,7 +5,7 @@ metadata:
   name: argocd
   namespace: argocd
   annotations:
-    cert-manager.io/issuer: letsencrypt-dns01-production-cluster-issuer-public
+    cert-manager.io/cluster-issuer: letsencrypt-dns01-production-cluster-issuer-public
 spec:
   ingressClassName: external-nginx
   tls: 
