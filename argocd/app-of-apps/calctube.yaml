@@ -22,7 +22,7 @@ spec:
     path: ./kubernetes/calctube/live
   destination:
     server: https://kubernetes.default.svc
-    namespace: default
+    namespace: calctube
   syncPolicy:
     syncOptions:
     - CreateNamespace=true

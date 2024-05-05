@@ -19,15 +19,6 @@ secretGenerator:
     annotations:
       config.kubernetes.io/local-config: "true"
 
-patches:
-- target:
-    kind: SealedSecret
-    name: argocd-notifications-secret
-  patch: |-
-    - op: replace
-      path: /metadata/annotations/sealedsecrets.bitnami.com~1namespace-wide
-      value: "true"
-
 configMapGenerator:
 - name: external-ingress-14314
   namespace: ingress-nginx-external
