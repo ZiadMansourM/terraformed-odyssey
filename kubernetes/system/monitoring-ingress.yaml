@@ -5,24 +5,24 @@ metadata:
   name: monitoring
   namespace: monitoring
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-dns01-production-cluster-issuer-private
+    cert-manager.io/cluster-issuer: letsencrypt-dns01-production-cluster-issuer-public
 spec:
   ingressClassName: internal-nginx
   tls: 
   - hosts:
-    - grafana.k8s.sreboy.com
-    secretName: grafana-k8s-sreboy-com-key-pair
+    - grafana.internal.k8s.sreboy.com
+    secretName: grafana-internal-k8s-sreboy-com-key-pair
   - hosts:
-    - prometheus.k8s.sreboy.com
-    secretName: prometheus-k8s-sreboy-com-key-pair
+    - prometheus.internal.k8s.sreboy.com
+    secretName: prometheus-internal-k8s-sreboy-com-key-pair
   - hosts:
-    - alertmanager.k8s.sreboy.com
-    secretName: alertmanager-k8s-sreboy-com-key-pair
+    - alertmanager.internal.k8s.sreboy.com
+    secretName: alertmanager-internal-k8s-sreboy-com-key-pair
   - hosts:
-    - kube-state-metrics.k8s.sreboy.com
-    secretName: kube-state-metrics-k8s-sreboy-com-key-pair
+    - kube-state-metrics.internal.k8s.sreboy.com
+    secretName: kube-state-metrics-internal-k8s-sreboy-com-key-pair
   rules:
-  - host: grafana.k8s.sreboy.com
+  - host: grafana.internal.k8s.sreboy.com
     http:
       paths:
       - path: /
@@ -32,7 +32,7 @@ spec:
             name: monitoring-grafana
             port:
               number: 80
-  - host: prometheus.k8s.sreboy.com
+  - host: prometheus.internal.k8s.sreboy.com
     http:
       paths:
       - path: /
@@ -42,7 +42,7 @@ spec:
             name: monitoring-kube-prometheus-prometheus
             port:
               number: 9090
-  - host: alertmanager.k8s.sreboy.com
+  - host: alertmanager.internal.k8s.sreboy.com
     http:
       paths:
       - path: /
@@ -52,7 +52,7 @@ spec:
             name: monitoring-kube-prometheus-alertmanager
             port:
               number: 9093
-  - host: kube-state-metrics.k8s.sreboy.com
+  - host: kube-state-metrics.internal.k8s.sreboy.com
     http:
       paths:
       - path: /
