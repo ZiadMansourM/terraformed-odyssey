@@ -112,16 +112,19 @@ extraArgs:
 # If you are using cluster issuer you need to replace it with:
 - --cluster-issuer-ambient-credentials
 - --issuer-ambient-credentials
+# - --enable-certificate-owner-ref=true
+- --dns01-recursive-nameservers-only
+- --dns01-recursive-nameservers=8.8.8.8:53,1.1.1.1:53
     YAML
   ]
 }
 
-resource "kubernetes_manifest" "cert_manager_cluster_issuer_public" {
+resource "kubectl_manifest" "cert_manager_cluster_issuer_public" {
   depends_on = [
     helm_release.cert-manager
   ]
 
-  manifest = {
+  yaml_body = yamlencode({
     "apiVersion" = "cert-manager.io/v1"
     "kind"       = "ClusterIssuer"
     "metadata" = {
@@ -138,23 +141,23 @@ resource "kubernetes_manifest" "cert_manager_cluster_issuer_public" {
           {
             "dns01" = {
               "route53" = {
-                "region"       = var.region
-                "hostedZoneID" = aws_route53_zone.public.zone_id
+                "region"       = "${var.region}"
+                "hostedZoneID" = "${aws_route53_zone.public.zone_id}"
               }
             }
           }
         ]
       }
     }
-  }
+  })
 }
 
-resource "kubernetes_manifest" "cert_manager_cluster_issuer_private" {
+resource "kubectl_manifest" "cert_manager_cluster_issuer_private" {
   depends_on = [
     helm_release.cert-manager
   ]
 
-  manifest = {
+  yaml_body = yamlencode({
     "apiVersion" = "cert-manager.io/v1"
     "kind"       = "ClusterIssuer"
     "metadata" = {
@@ -171,13 +174,13 @@ resource "kubernetes_manifest" "cert_manager_cluster_issuer_private" {
           {
             "dns01" = {
               "route53" = {
-                "region"       = var.region
-                "hostedZoneID" = aws_route53_zone.private.zone_id
+                "region"       = "${var.region}"
+                "hostedZoneID" = "${aws_route53_zone.private.zone_id}"
               }
             }
           }
         ]
       }
     }
-  }
+  })
 }

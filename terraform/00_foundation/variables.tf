@@ -44,8 +44,8 @@ variable "node_group_scaling_config" {
   })
 
   default = {
-    desired_size = 2
-    max_size     = 2
-    min_size     = 2
+    desired_size = 4
+    max_size     = 4
+    min_size     = 4
   }
 }

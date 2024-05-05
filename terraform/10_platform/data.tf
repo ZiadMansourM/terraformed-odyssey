@@ -12,7 +12,7 @@ data "aws_caller_identity" "current" {}
 
 data "kubernetes_service" "external_nginx_controller" {
   metadata {
-    name      = "ingress-nginx-controller"
+    name      = "ingress-nginx-external-controller"
     namespace = "ingress-nginx-external"
   }
 
@@ -23,7 +23,7 @@ data "kubernetes_service" "external_nginx_controller" {
 
 data "kubernetes_service" "internal_nginx_controller" {
   metadata {
-    name      = "ingress-nginx-controller"
+    name      = "ingress-nginx-internal-controller"
     namespace = "ingress-nginx-internal"
   }
 
