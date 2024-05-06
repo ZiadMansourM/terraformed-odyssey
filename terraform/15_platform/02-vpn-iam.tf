@@ -32,6 +32,9 @@ resource "aws_identitystore_user" "ziadh" {
     given_name  = "Ziad"
     family_name = "Hassanin"
   }
+  emails {
+    value = "thesreboy@gmail.com"
+  }
   user_name = "ziadh"
 }
 
