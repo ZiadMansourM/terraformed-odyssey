@@ -12,6 +12,8 @@ controller:
     use-forwarded-headers: "true"
     # https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/configmap.md#proxy-body-size
     proxy-body-size: "0"
+    # https://kubernetes.github.io/ingress-nginx/examples/customization/custom-errors/
+    custom-http-errors: "404,503"
   
   # This name we will reference this particular ingress controller
   # incase you have multiple ingress controllers, you can use
@@ -72,3 +74,22 @@ controller:
       enabled: true
       # additionalLabels:
       #   prometheus: monitor
+
+defaultBackend:
+  enabled: true
+  image:
+    registry: registry.k8s.io
+    image: ingress-nginx/nginx-errors
+    tag: "v20230505@sha256:3600dcd1bbd0d05959bb01af4b272714e94d22d24a64e91838e7183c80e53f7f"
+  extraVolumes:
+  - name: custom-error-pages
+    configMap:
+      name: custom-error-pages
+      items:
+      - key: "404"
+        path: "404.html"
+      - key: "503"
+        path: "503.html"
+  extraVolumeMounts:
+  - name: custom-error-pages
+    mountPath: /www
