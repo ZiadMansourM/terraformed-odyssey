@@ -4,15 +4,6 @@ metadata:
   name: calctube
 ---
 apiVersion: v1
-data:
-  auth: emlhZGg6JGFwcjEkQmFPQkFKa0okQ0ZyY1ZSL3dVTkNMU3VTVm54Z1lnLgo=
-kind: Secret
-metadata:
-  name: calctube-external-ingress-passwd-2kd92chc88
-  namespace: calctube
-type: Opaque
----
-apiVersion: v1
 kind: Service
 metadata:
   name: calctube
@@ -53,7 +44,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-dns01-production-cluster-issuer-public
     nginx.ingress.kubernetes.io/auth-realm: Authentication Required - CalcTube
-    nginx.ingress.kubernetes.io/auth-secret: calctube-external-ingress-passwd-2kd92chc88
+    nginx.ingress.kubernetes.io/auth-secret: calctube-external-ingress-passwd
     nginx.ingress.kubernetes.io/auth-type: basic
   name: calctube
   namespace: calctube

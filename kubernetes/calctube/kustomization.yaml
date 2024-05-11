@@ -10,9 +10,3 @@ resources:
 images:
 - name: ziadmmh/calctube
   newTag: v0.0.1
-
-secretGenerator:
-- name: calctube-external-ingress-passwd
-  namespace: calctube
-  files:
-  - files/auth

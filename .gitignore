@@ -1,4 +1,5 @@
 **/**-ignore.yaml
+**/**-ignore-local-secret
 
 # Local .terraform directories
 **/.terraform/*

@@ -2,17 +2,22 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
+- ../components/
 - 00-namespace.yaml
 - 01-deployment.yaml
 - 02-service.yaml
 - 03-ingress.yaml
+- sealed-goviolin-ingress-secret.yaml
 
 images:
 - name: ziadmmh/goviolin
   newTag: v0.0.1
 
 secretGenerator:
-- name: goviolin-external-ingress-passwd
+- name: goviolin-ingress-secret
   namespace: goviolin
   files:
-  - files/auth
+  - sealed-goviolin-ingress-secret.yaml
+  options:
+    annotations:
+      config.kubernetes.io/local-config: "true"
