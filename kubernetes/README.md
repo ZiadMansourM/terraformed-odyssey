@@ -11,6 +11,11 @@ kubectl create secret generic argocd-notifications-secret -n argocd --from-file 
 
 # read secrets/argocd-notifications-secret.yaml then seal it:
 kubeseal --controller-name sealed-secrets --controller-namespace sealed-secrets --format yaml < secrets/argocd-notifications-secret.yaml > sealed-argocd-notifications-secret.yaml
+
+# Third Example
+kubectl create secret generic alertmanager-slack-webhook-secret -n monitoring --from-literal slack-webhook-url=slack-webhook-url --dry-run=client -o yaml > secrets/alertmanager-slack-webhook-secret-ignore.yaml
+
+kubeseal --controller-name sealed-secrets --controller-namespace sealed-secrets --format yaml < secrets/alertmanager-slack-webhook-secret-ignore.yaml > sealed-alertmanager-slack-webhook-secret.yaml
 ```
 
 

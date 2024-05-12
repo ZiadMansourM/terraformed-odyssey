@@ -7,6 +7,9 @@ resources:
 - argocd-ingress.yaml
 - argocd-notifications-cm.yaml
 - sealed-argocd-notifications-secret.yaml
+- trivy-alerts.yaml
+- alert-manager-slack.yaml
+- sealed-alertmanager-slack-webhook-secret.yaml
 
 secretGenerator:
 - name: argocd-notifications-secret
@@ -17,12 +20,29 @@ secretGenerator:
     annotations:
       config.kubernetes.io/local-config: "true"
 
+- name: alertmanager-slack-webhook-secret
+  namespace: monitoring
+  files:
+  - sealed-alertmanager-slack-webhook-secret.yaml
+  options:
+    annotations:
+      config.kubernetes.io/local-config: "true"
+
 configMapGenerator:
 - name: custom-error-pages
   namespace: ingress-nginx-external
   files:
   - custom-error-pages/404.html
   - custom-error-pages/503.html
+
+- name: trivy-operator-17813
+  namespace: monitoring
+  files:
+  - dashboards/trivy-operator-17813.json
+  options:
+    # disableNameSuffixHash: true
+    labels:
+      grafana_dashboard: "1"
 
 - name: external-ingress-14314
   namespace: ingress-nginx-external
